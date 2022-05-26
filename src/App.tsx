@@ -1,6 +1,7 @@
 import { IQuestion } from "./types/questions";
 import { IUser } from "./types/user";
 import {useState, useEffect} from "react";
+import styles from "./styles/App.module.scss";
 
 function App() {
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
@@ -18,24 +19,23 @@ function App() {
    }
   };
 
-  const getUsers = async () => {
-   const resp = await fetch(url + "/users");
-   if (resp.ok === true) {
-    const usersData: IUser[] = await resp.json();
-    setUsers(usersData);
-   } else {
-       throw new Error("Failed to fetch users")
-   }
-  };
-  getQuestions();
-  getUsers();
-  console.log("questions", questions);
-  console.log("users", users)
+//   const getUsers = async () => {
+//    const resp = await fetch(url + "/users");
+//    if (resp.ok === true) {
+//     const usersData: IUser[] = await resp.json();
+//     setUsers(usersData);
+//    } else {
+//        throw new Error("Failed to fetch users")
+//    }
+//   };
+
  }, []);
 
 
- return <div className="App">
-    
+ return <div className={styles.app}>
+     <div className={styles.wrapper}>
+         
+     </div>
 
  </div>;
 }
