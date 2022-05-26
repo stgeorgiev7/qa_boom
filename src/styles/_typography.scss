@@ -1,0 +1,131 @@
+@use "_colors";
+@import "utils/media";
+@import "mixins";
+
+p,
+ul {
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  &.large {
+    font-size: 1.375rem;
+    line-height: 1.875rem;
+  }
+  &.small {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  &.small-x {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+}
+
+p {
+  &.label {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    letter-spacing: 0.1875rem;
+    text-transform: uppercase;
+    color: rgba(colors.$text-primary, 0.5);
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: colors.$text-primary;
+  font-weight: bold;
+  text-transform: uppercase;
+  &.gradient {
+    @include gradient;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &.quiet {
+    text-transform: initial;
+  }
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 4.0625rem;
+  line-height: 4.8125rem;
+  text-transform: capitalize;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 3.5625rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+  line-height: 2.0625rem;
+}
+
+h4 {
+  font-size: 1.375rem;
+  line-height: 1.625rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  line-height: 1.3125rem;
+}
+
+.gradientText {
+  @include gradient;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@include media("<sm") {
+  h1 {
+    font-size: 2.4375rem;
+    line-height: 2.875rem;
+  }
+
+  h2 {
+    font-size: 2.0625rem;
+    line-height: 2.4375rem;
+  }
+
+  h3 {
+    font-size: 1.1875rem;
+    line-height: 1.4375rem;
+  }
+
+  h4 {
+    font-size: 0.9375rem;
+    line-height: 1.125rem;
+  }
+
+  h5 {
+    font-size: 0.8125rem;
+    line-height: 0.9375rem;
+  }
+
+  p,
+  ul {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    &.large {
+      font-size: 1.125rem;
+      line-height: 1.625rem;
+    }
+    &.small {
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
+    }
+    &.small-x {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
+  }
+}

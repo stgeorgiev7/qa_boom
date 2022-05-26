@@ -1,0 +1,11 @@
+@mixin gradient {
+  background: linear-gradient(130.3deg, #438eff 17.2%, #ff00f5 77.88%);
+}
+
+@mixin gradient-soft {
+  background: linear-gradient(152.8deg, #438eff 0.17%, #ff00f5 101.75%);
+}
+
+@mixin gradient-success {
+  background: linear-gradient(92.88deg, #2ae7a2 15.46%, #03edf8 93.11%);
+}
