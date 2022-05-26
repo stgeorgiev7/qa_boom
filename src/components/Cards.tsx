@@ -1,7 +1,7 @@
 import { IQuestion } from "../types/questions";
 import { useState, useEffect } from "react";
 import styles from "./Cards.module.scss";
-import { Card, CardContent, Typography, CardMedia } from "@mui/material";
+import { Card, CardContent, Typography, Grid } from "@mui/material";
 import icon from "../assets/icon.svg";
 
 export default function Cards() {
@@ -25,14 +25,19 @@ export default function Cards() {
    {questions.map((question) => {
     console.log(question);
     return (
-     <div>
+     <div className={styles.container}>
       <Card>
-       <CardContent>
-        <img src={icon} />
-
-        <Typography variant='h5' component='h2'>
-         {question.theme}
-        </Typography>
+       <CardContent className={styles.card}>
+        <Grid container spacing={2} alignItems='center'>
+         <Grid item>
+          <img src={icon} />
+         </Grid>
+         <Grid item>
+          <Typography variant='h5' component='h2'>
+           {question.theme}
+          </Typography>
+         </Grid>
+        </Grid>
        </CardContent>
       </Card>
      </div>

@@ -1,0 +1,12 @@
+@use "../styles/colors";
+
+.container {
+ padding: 20px 200px;
+ border-radius: 20px !important;
+}
+
+.card {
+ color: colors.$text-primary-contrast;
+ background: colors.$base-primary-translucent;
+ padding: 20px !important;
+}

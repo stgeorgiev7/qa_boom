@@ -2,21 +2,18 @@
 @import "mixins";
 
 body {
-    background: colors.$base-primary;
-    margin: auto;
-    color: colors.$text-primary-contrast;
-    overflow-x: hidden;
-    padding: 0 !important;
+ background: colors.$base-primary;
+ margin: auto;
+ color: colors.$text-primary-contrast;
+ overflow-x: hidden;
+ padding: 0 !important;
 }
 
 .wrapper {
-    width: 100%;
-    margin: auto;
-    height: 300px;
-    position: relative;
-    padding: 0 50px;
-    @include gradient-soft;
-    z-index: 0;
+ margin: auto;
+ height: 300px;
+ position: relative;
+ padding: 0 50px;
+ @include gradient-soft;
+ z-index: 0;
 }
-
-
