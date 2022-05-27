@@ -1,8 +1,10 @@
 import { IAnswer } from "./answers";
+import { IUser } from "./user";
 
 export interface IQuestion {
  theme: string;
- createdBy: number;
+ user: IUser;
+ createdAt: string;
  xp: number;
  completed: boolean;
  question: string;

@@ -44,6 +44,13 @@
  }
 }
 
+.user {
+ img {
+  width: 40px;
+  border-radius: 50%;
+ }
+}
+
 .card {
  color: colors.$text-primary-contrast;
  background: colors.$base-primary-contrast;

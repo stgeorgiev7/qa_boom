@@ -1,7 +1,6 @@
 import { IQuestion } from "../types/questions";
 import { useState, useEffect } from "react";
 import styles from "./Cards.module.scss";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
 import icon from "../assets/icon.svg";
 import dayjs from "dayjs";
 
@@ -31,7 +30,9 @@ export default function Cards() {
        <img src={icon} />
        <div className={styles.theme}>
         <h3 className={styles.title}>{question.theme}</h3>
-        <h4 className={styles.gradientText}>data = trqbwa da oprawq bazata</h4>
+        <h4 className={styles.gradientText}>
+         {dayjs().diff(question.createdAt, "day")} days ago
+        </h4>
        </div>
       </div>
       <div className={styles.rightBlock}>
@@ -44,7 +45,7 @@ export default function Cards() {
         <h4 className={styles.gradientText}>{question.answers.length}</h4>
        </div>
        <div className={styles.user}>
-        <img src='' />
+        <img src={question.user.avatar} />
        </div>
       </div>
      </div>
