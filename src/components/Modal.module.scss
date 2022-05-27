@@ -5,11 +5,14 @@
  width: clamp(50%, 700px, 90%);
  height: min(50%, 300px);
  margin: auto;
- padding: 0 2rem;
  border-radius: 10px;
  display: flex;
  flex-direction: column;
- background-color: colors.$base-primary-contrast;
+ background-color: colors.$base-primary-translucent;
+}
+
+.topModal {
+ padding: 0px 20px;
 }
 
 .title {
@@ -54,6 +57,11 @@
  text-transform: uppercase;
  color: colors.$text-primary-contrast;
  border: none;
+}
+
+.cardWrapper {
+ width: 100%;
+ background-color: colors.$base-primary-contrast;
 }
 
 .gradientText {

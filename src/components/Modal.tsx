@@ -39,7 +39,7 @@ export default function Modal({ handleClose, question }: IBackdrop) {
     animate="visible"
     exit="exit"
    >
-    <div>
+    <div className={styles.topModal}>
      <div className={styles.title}>
       <h1>{question?.theme}</h1>
      </div>
@@ -62,6 +62,7 @@ export default function Modal({ handleClose, question }: IBackdrop) {
       </div>
      </div>
     </div>
+    <div className={styles.cardWrapper}>NQKWI KARTI BRAAAT</div>
    </motion.div>
   </Backdrop>
  );
