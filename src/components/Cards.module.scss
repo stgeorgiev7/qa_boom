@@ -14,21 +14,22 @@
  flex-direction: row;
  justify-content: space-between;
  align-items: center;
- margin: 20px;
+ margin: 10px;
  background: colors.$base-primary-contrast;
- border-radius: 15px;
+ border-radius: 10px;
  width: 900px;
+ padding: 20px;
 }
 .leftblock {
  display: flex;
  font-size: 16px;
  align-items: center;
  img {
-  margin-left: 30px;
-  width: 50px;
+  margin-left: 20px;
+  width: 40px;
  }
  .theme {
-  margin-left: 20px;
+  margin-left: 10px;
  }
 }
 
@@ -39,8 +40,12 @@
  .bounty,
  .answers,
  .user {
-  margin-right: 40px;
+  margin-right: 30px;
   text-align: center;
+  h3 {
+   font-size: 14px;
+   text-transform: uppercase;
+  }
  }
 }
 
@@ -61,6 +66,21 @@
  @include gradient-soft;
  background-clip: text;
  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+ font-size: 20px;
+ font-weight: bolder;
+}
+
+h3 {
+ font-weight: 200;
+}
+
+h2,
+h3,
+h4 {
+ margin: 5px;
 }
 
 h4 {

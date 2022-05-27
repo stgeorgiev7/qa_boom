@@ -38,11 +38,11 @@ export default function Cards() {
       <div className={styles.rightBlock}>
        <div className={styles.bounty}>
         <h3 className={styles.bountyTitle}>Bounty</h3>
-        <h4 className={styles.gradientText}>+{question.xp}xp</h4>
+        <h2 className={styles.gradientText}>+{question.xp}xp</h2>
        </div>
        <div className={styles.answers}>
         <h3 className={styles.answersTitle}>Answers</h3>
-        <h4 className={styles.gradientText}>{question.answers.length}</h4>
+        <h2 className={styles.gradientText}>{question.answers.length}</h2>
        </div>
        <div className={styles.user}>
         <img src={question.user.avatar} />
