@@ -37,7 +37,7 @@
   position: absolute;
   left: 1px;
   height: 65%;
-  width: 0.1%;
+  width: 0.01%;
   border: 2px solid #2ae7a2;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
@@ -47,11 +47,6 @@
 .container,
 .completed {
  cursor: pointer;
- transition: 1s;
- animation: card-load 1s;
- &:hover {
-  transform: scale(1.02);
- }
 }
 
 .leftblock {
