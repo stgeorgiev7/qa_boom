@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import styles from "./Cards.module.scss";
 import { Card, CardContent, Typography, Grid } from "@mui/material";
 import icon from "../assets/icon.svg";
+import dayjs from "dayjs";
 
 export default function Cards() {
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
@@ -26,20 +27,26 @@ export default function Cards() {
     console.log(question);
     return (
      <div className={styles.container}>
-      <Card>
-       <CardContent className={styles.card}>
-        <Grid container spacing={2} alignItems='center'>
-         <Grid item>
-          <img src={icon} />
-         </Grid>
-         <Grid item>
-          <Typography variant='h5' component='h2'>
-           {question.theme}
-          </Typography>
-         </Grid>
-        </Grid>
-       </CardContent>
-      </Card>
+      <div className={styles.leftblock}>
+       <img src={icon} />
+       <div className={styles.theme}>
+        <h3 className={styles.title}>{question.theme}</h3>
+        <h4 className={styles.gradientText}>data = trqbwa da oprawq bazata</h4>
+       </div>
+      </div>
+      <div className={styles.rightBlock}>
+       <div className={styles.bounty}>
+        <h3 className={styles.bountyTitle}>Bounty</h3>
+        <h4 className={styles.gradientText}>+{question.xp}xp</h4>
+       </div>
+       <div className={styles.answers}>
+        <h3 className={styles.answersTitle}>Answers</h3>
+        <h4 className={styles.gradientText}>{question.answers.length}</h4>
+       </div>
+       <div className={styles.user}>
+        <img src='' />
+       </div>
+      </div>
      </div>
     );
    })}

@@ -1,12 +1,61 @@
 @use "../styles/colors";
+@import "../styles/mixins";
+
+.wrapper {
+ padding-top: 30px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
 
 .container {
- padding: 20px 200px;
- border-radius: 20px !important;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ margin: 20px;
+ background: colors.$base-primary-contrast;
+ border-radius: 15px;
+ width: 900px;
+}
+.leftblock {
+ display: flex;
+ font-size: 16px;
+ align-items: center;
+ img {
+  margin-left: 30px;
+  width: 50px;
+ }
+ .theme {
+  margin-left: 20px;
+ }
+}
+
+.rightBlock {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ .bounty,
+ .answers,
+ .user {
+  margin-right: 40px;
+  text-align: center;
+ }
 }
 
 .card {
  color: colors.$text-primary-contrast;
- background: colors.$base-primary-translucent;
+ background: colors.$base-primary-contrast;
  padding: 20px !important;
+}
+
+.gradientText {
+ @include gradient-soft;
+ background-clip: text;
+ -webkit-text-fill-color: transparent;
+}
+
+h4 {
+ font-weight: bold !important;
 }
