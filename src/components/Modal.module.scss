@@ -3,7 +3,7 @@
 
 .modal {
  width: clamp(50%, 700px, 90%);
- height: min(50%, 300px);
+ height: min(70%, 900px);
  margin: auto;
  border-radius: 10px;
  display: flex;
@@ -48,7 +48,8 @@
  }
 }
 
-.viewButton {
+.viewButton,
+.postButton {
  @include gradient-soft;
  padding: 15px 30px;
  border-radius: 25px;
@@ -62,6 +63,36 @@
 .cardWrapper {
  width: 100%;
  background-color: colors.$base-primary-contrast;
+}
+.bottomModal {
+ padding: 20px;
+}
+
+.inputContainer {
+ margin: 20px;
+}
+
+.input {
+ background: colors.$base-primary-contrast;
+ color: colors.$text-primary-contrast;
+ width: 100%;
+ border: none;
+ padding: 30px 5px;
+ margin-bottom: 20px;
+ border-radius: 10px;
+ border: 1px solid colors.$base-primary-contrast;
+ outline: none;
+ &::placeholder {
+  font-weight: 300;
+  color: colors.$text-secondary-contrast;
+  font-family: laca;
+  padding-right: 20px;
+ }
+}
+
+.buttonContainer {
+ float: right;
+ margin: 20px;
 }
 
 .gradientText {

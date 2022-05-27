@@ -39,6 +39,8 @@ export default function Modal({ handleClose, question }: IBackdrop) {
     animate="visible"
     exit="exit"
    >
+    {/* TOP */}
+
     <div className={styles.topModal}>
      <div className={styles.title}>
       <h1>{question?.theme}</h1>
@@ -62,7 +64,24 @@ export default function Modal({ handleClose, question }: IBackdrop) {
       </div>
      </div>
     </div>
+
+    {/* Cards */}
+
     <div className={styles.cardWrapper}>NQKWI KARTI BRAAAT</div>
+
+    {/* BOTOM */}
+    <div className={styles.bottomModal}>
+     <div className={styles.inputContainer}>
+      <input
+       type="text"
+       className={styles.input}
+       placeholder={`Type your answer here... If it’s accepted you will win the bounty of ${question?.xp} xp...`}
+      />
+     </div>
+     <div className={styles.buttonContainer}>
+      <button className={styles.postButton}>POST</button>
+     </div>
+    </div>
    </motion.div>
   </Backdrop>
  );
