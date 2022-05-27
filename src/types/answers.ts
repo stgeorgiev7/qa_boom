@@ -1,6 +1,7 @@
+import { IUser } from "./user";
 export interface IAnswer {
  createdAt: string;
- userId: number;
+ user: IUser;
  body: string;
  correct: boolean;
  id: string;

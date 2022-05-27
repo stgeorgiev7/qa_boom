@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Backdrop from "./Backdrop";
 import styles from "./Modal.module.scss";
 import { IQuestion } from "../types/questions";
+import ModalCard from "./ModalCard";
 interface IBackdrop {
  handleClose: () => void;
  question: IQuestion | undefined;
@@ -67,7 +68,25 @@ export default function Modal({ handleClose, question }: IBackdrop) {
 
     {/* Cards */}
 
-    <div className={styles.cardWrapper}>NQKWI KARTI BRAAAT</div>
+    <div className={styles.cardWrapper}>
+     <div className={styles.questionsCards}>
+      <h4>Questions</h4>
+      <ModalCard
+       type="question"
+       body={question?.question}
+       user={question?.user}
+      />
+     </div>
+     <div className={styles.answersCards}>
+      <h4>Answers</h4>
+      {question &&
+       question.answers.map((answer) => {
+        return (
+         <ModalCard type="answer" body={answer.body} user={answer.user} />
+        );
+       })}
+     </div>
+    </div>
 
     {/* BOTOM */}
     <div className={styles.bottomModal}>
