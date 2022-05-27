@@ -2,6 +2,7 @@ import { IQuestion } from "../types/questions";
 import { useState, useEffect } from "react";
 import styles from "./Cards.module.scss";
 import icon from "../assets/icon.svg";
+import successIcon from "../assets/success_icon.svg";
 import dayjs from "dayjs";
 
 export default function Cards() {
@@ -25,12 +26,20 @@ export default function Cards() {
    {questions.map((question) => {
     console.log(question);
     return (
-     <div className={styles.container}>
+     <div className={question.completed ? styles.completed : styles.container}>
       <div className={styles.leftblock}>
-       <img src={icon} />
+       {question.completed ? (
+        <img src={successIcon} alt="success-icon" />
+       ) : (
+        <img src={icon} alt="icon" />
+       )}
        <div className={styles.theme}>
         <h3 className={styles.title}>{question.theme}</h3>
-        <h4 className={styles.gradientText}>
+        <h4
+         className={
+          question.completed ? styles.successText : styles.gradientText
+         }
+        >
          {dayjs().diff(question.createdAt, "day")} days ago
         </h4>
        </div>
@@ -38,11 +47,23 @@ export default function Cards() {
       <div className={styles.rightBlock}>
        <div className={styles.bounty}>
         <h3 className={styles.bountyTitle}>Bounty</h3>
-        <h2 className={styles.gradientText}>+{question.xp}xp</h2>
+        <h2
+         className={
+          question.completed ? styles.successText : styles.gradientText
+         }
+        >
+         +{question.xp}xp
+        </h2>
        </div>
        <div className={styles.answers}>
         <h3 className={styles.answersTitle}>Answers</h3>
-        <h2 className={styles.gradientText}>{question.answers.length}</h2>
+        <h2
+         className={
+          question.completed ? styles.successText : styles.gradientText
+         }
+        >
+         {question.answers.length}
+        </h2>
        </div>
        <div className={styles.user}>
         <img src={question.user.avatar} />
