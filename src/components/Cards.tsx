@@ -14,6 +14,9 @@ export default function Cards() {
 
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
  const [questions, setQuestions] = useState<IQuestion[]>([]);
+ const [questionBody, setQuestionBody] = useState<string>("");
+ const [openedQuestion, setOpenedQuestion] = useState<IQuestion>();
+
  useEffect(() => {
   const getQuestions = async () => {
    const resp = await fetch(url + "/questions");
@@ -27,16 +30,26 @@ export default function Cards() {
   getQuestions();
  }, []);
 
+ useEffect(() => {
+  const selectedQuestion = questions.find(
+   (element) => element.question === questionBody
+  );
+  setOpenedQuestion(selectedQuestion);
+ }, [questionBody]);
+
  return (
   <motion.div className={styles.wrapper}>
    {questions.map((question) => {
-    console.log(question);
     return (
      <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.99 }}
-      onClick={(): void => (modalOpen ? closeModal() : openModal())}
+      onClick={(): void => {
+       modalOpen ? closeModal() : openModal();
+       setQuestionBody(question.question);
+      }}
       className={question.completed ? styles.completed : styles.container}
+      key={question.id}
      >
       <div className={styles.leftblock}>
        {question.completed ? (
@@ -83,8 +96,8 @@ export default function Cards() {
      </motion.div>
     );
    })}
-   <AnimatePresence initial={false}>
-    {modalOpen && <Modal text="opataaa mai stana" handleClose={closeModal} />}
+   <AnimatePresence initial={false} exitBeforeEnter={true}>
+    {modalOpen && <Modal question={openedQuestion} handleClose={closeModal} />}
    </AnimatePresence>
   </motion.div>
  );
