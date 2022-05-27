@@ -1,0 +1,40 @@
+@use "../styles/colors";
+@import "../styles/mixins";
+
+.wrapper {
+ padding: 0px 20px;
+ margin: 20px;
+ display: flex;
+ flex-direction: column;
+ background-color: colors.$base-primary-translucent;
+ border-radius: 10px;
+}
+
+.user {
+ display: flex;
+ padding: 10px;
+ margin-top: 20px;
+ img {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+ }
+ p {
+  margin: 5px;
+  padding-left: 10px;
+ }
+}
+
+.questionContainer {
+ padding: 0 65px;
+ p {
+  margin-top: 0px;
+  margin-bottom: 20px;
+ }
+}
+
+.gradientText {
+ @include gradient-soft;
+ background-clip: text;
+ -webkit-text-fill-color: transparent;
+}
