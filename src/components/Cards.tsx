@@ -4,8 +4,14 @@ import styles from "./Cards.module.scss";
 import icon from "../assets/icon.svg";
 import successIcon from "../assets/success_icon.svg";
 import dayjs from "dayjs";
+import { motion, AnimatePresence } from "framer-motion";
+import Modal from "./Modal";
 
 export default function Cards() {
+ const [modalOpen, setModalOper] = useState<boolean>(false);
+ const openModal = (): void => setModalOper(true);
+ const closeModal = (): void => setModalOper(false);
+
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
  const [questions, setQuestions] = useState<IQuestion[]>([]);
  useEffect(() => {
@@ -22,11 +28,16 @@ export default function Cards() {
  }, []);
 
  return (
-  <div className={styles.wrapper}>
+  <motion.div className={styles.wrapper}>
    {questions.map((question) => {
     console.log(question);
     return (
-     <div className={question.completed ? styles.completed : styles.container}>
+     <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.99 }}
+      onClick={(): void => (modalOpen ? closeModal() : openModal())}
+      className={question.completed ? styles.completed : styles.container}
+     >
       <div className={styles.leftblock}>
        {question.completed ? (
         <img src={successIcon} alt="success-icon" />
@@ -69,9 +80,12 @@ export default function Cards() {
         <img src={question.user.avatar} />
        </div>
       </div>
-     </div>
+     </motion.div>
     );
    })}
-  </div>
+   <AnimatePresence initial={false}>
+    {modalOpen && <Modal text="opataaa mai stana" handleClose={closeModal} />}
+   </AnimatePresence>
+  </motion.div>
  );
 }
