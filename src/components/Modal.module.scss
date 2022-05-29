@@ -54,7 +54,7 @@
  padding: 15px 30px;
  border-radius: 25px;
  font-size: 14px;
- font-weight: 500;
+ font-weight: bold;
  text-transform: uppercase;
  color: colors.$text-primary-contrast;
  border: none;
@@ -114,6 +114,7 @@
  float: right;
  .postButton {
   margin-right: 20px;
+  font-weight: bold;
  }
 }
 

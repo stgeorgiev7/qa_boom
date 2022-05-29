@@ -44,7 +44,9 @@ export default function Modal({
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
  const [apiAnswers, setapiAnswers] = useState<IAnswer[]>([]);
  const [answered, setAnswered] = useState<boolean>(false);
+
  const lastAnswer = useRef<HTMLDivElement>(null);
+ const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
  useEffect(() => {
   setapiAnswers((question && question?.answers) || []);
@@ -73,11 +75,11 @@ export default function Modal({
       "Content-Type": "application/json",
      },
      body: JSON.stringify(answerBody),
-    }).then((res) => {
-     console.log(res);
+    }).then(() => {
      setapiAnswers([...apiAnswers, answerBody]);
      setAnswered(true);
      scrollToBottom();
+     setIsAnswered(true);
      console.log("new answer added");
     });
    } catch (error) {
@@ -120,7 +122,13 @@ export default function Modal({
        </div>
       </div>
       <div className={styles.rightBlock}>
-       <button className={styles.viewButton}>View Task</button>
+       <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.99 }}
+        className={styles.viewButton}
+       >
+        View Task
+       </motion.button>
       </div>
      </div>
     </div>
@@ -169,7 +177,11 @@ export default function Modal({
         onChange={(e) => setAnswer(e.target.value)}
        />
       ) : (
-       <motion.div>
+       <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1.05 }}
+        exit={{ scale: 0.8 }}
+       >
         <h2
          className={styles.answered}
         >{`Question answered if it’s accepted you will win the bounty of ${question?.xp} xp  🤓`}</h2>
@@ -177,9 +189,27 @@ export default function Modal({
       )}
      </div>
      <div className={styles.buttonContainer}>
-      <button className={styles.postButton} onClick={handlePost}>
-       POST
-      </button>
+      {!isAnswered ? (
+       <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.99 }}
+        className={styles.postButton}
+        onClick={handlePost}
+        disabled={isAnswered}
+       >
+        POST
+       </motion.button>
+      ) : (
+       <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.99 }}
+        className={styles.postButton}
+        onClick={handleClose}
+        disabled={isAnswered}
+       >
+        Close
+       </motion.button>
+      )}
      </div>
     </div>
    </motion.div>
