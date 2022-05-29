@@ -81,12 +81,15 @@ export default function Modal({ handleClose, question }: IBackdrop) {
       {question &&
        question.answers.map((answer) => {
         return (
-         <ModalCard
-          type='answer'
-          body={answer?.body}
-          user={answer?.user}
-          key={answer.createdAt}
-         />
+         <div className={answer.correct ? styles.correct : styles.card}>
+          <ModalCard
+           type='answer'
+           body={answer?.body}
+           user={answer?.user}
+           key={answer.createdAt}
+           correct={answer?.correct}
+          />
+         </div>
         );
        })}
      </div>

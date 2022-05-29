@@ -1,28 +1,43 @@
 @use "../styles/colors";
 @import "../styles/mixins";
 
-.wrapper {
+.wrapper,
+.correct {
  padding: 0px 20px;
  margin: 20px;
  display: flex;
  flex-direction: column;
- background-color: colors.$base-primary-translucent;
  border-radius: 10px;
+}
+
+.wrapper {
+ background-color: colors.$base-primary-translucent;
+}
+
+.correct {
+ border: 1px solid colors.$success;
+ background-color: #00170f;
 }
 
 .user {
  display: flex;
  padding: 10px;
- margin-top: 20px;
+ margin-top: 10px;
  img {
-  width: 40px !important;
-  height: 40px !important;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
  }
  p {
   margin: 5px;
   padding-left: 10px;
  }
+}
+
+.correctIcon {
+ width: 25px !important;
+ position: absolute;
+ right: 40px;
 }
 
 .questionContainer {
