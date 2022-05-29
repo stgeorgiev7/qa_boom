@@ -40,18 +40,29 @@ export default function Modal({
 }: IBackdrop) {
  const [answer, setAnswer] = useState<string>("");
  const currentDate: string = dayjs().toString();
+
  const nextId = question && (Number(question?.answers?.length) + 1).toString();
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
+
  const [apiAnswers, setapiAnswers] = useState<IAnswer[]>([]);
  const [answered, setAnswered] = useState<boolean>(false);
 
  const lastAnswer = useRef<HTMLDivElement>(null);
  const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
+ const [askedByUser, setAsked] = useState<boolean>(false);
+
  useEffect(() => {
   setapiAnswers((question && question?.answers) || []);
-  console.log(apiAnswers);
+  console.log(question?.user.id);
+  console.log(currentUser.id);
+  question?.user.name == currentUser.name ? setAsked(true) : setAsked(false);
  }, [question]);
+
+ useEffect(() => {
+  console.log(question?.user.id);
+  console.log(currentUser.id);
+ }, []);
 
  const scrollToBottom = (): void =>
   lastAnswer.current?.scrollIntoView({
@@ -165,6 +176,7 @@ export default function Modal({
            body={answer?.body}
            user={answer?.user}
            correct={answer?.correct}
+           askedByUser={askedByUser}
           />
          </div>
         );

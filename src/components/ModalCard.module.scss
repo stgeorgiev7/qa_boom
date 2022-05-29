@@ -21,6 +21,12 @@
 
 .user {
  display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+
+.leftBlock {
+ display: flex;
  padding: 10px;
  margin-top: 10px;
  img {
@@ -33,12 +39,31 @@
   padding-left: 10px;
  }
 }
+.rightBlock {
+ display: flex;
+ align-items: center;
+}
 
 .correctIcon {
  width: 25px !important;
  position: relative;
  left: 26rem;
  top: -10px;
+}
+
+.acceptButton {
+ top: 10px;
+ padding: 0px 30px;
+ height: 30px;
+ text-align: center;
+ border-radius: 20px;
+ border: 1px solid colors.$success;
+ background-color: #00170f;
+ font-family: laca;
+ font-weight: bold;
+ @include gradient-success;
+ background-clip: text;
+ -webkit-text-fill-color: transparent;
 }
 
 .questionContainer {
