@@ -4,6 +4,6 @@ export interface IAnswer {
  user: IUser;
  body: string;
  correct: boolean;
- id: string;
- questionId: string;
+ id: string | undefined;
+ questionId: string | undefined;
 }

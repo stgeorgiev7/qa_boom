@@ -1,4 +1,6 @@
 import { IQuestion } from "../types/questions";
+import { IUser } from "../types/user";
+import { IAnswer } from "../types/answers";
 import { useState, useEffect } from "react";
 import styles from "./Cards.module.scss";
 import icon from "../assets/icon.svg";
@@ -11,6 +13,13 @@ export default function Cards() {
  const [modalOpen, setModalOper] = useState<boolean>(false);
  const openModal = (): void => setModalOper(true);
  const closeModal = (): void => setModalOper(false);
+ const defaultUser: IUser = {
+  name: "Wilbert Lynch",
+  avatar:
+   "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1120.jpg",
+  xp: 67,
+  id: "2",
+ };
 
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
  const [questions, setQuestions] = useState<IQuestion[]>([]);
@@ -32,7 +41,7 @@ export default function Cards() {
 
  useEffect(() => {
   const selectedQuestion = questions.find(
-   (element) => element.question === questionBody
+   (element) => element.question === questionBody,
   );
   setOpenedQuestion(selectedQuestion);
  }, [questionBody]);
@@ -53,9 +62,9 @@ export default function Cards() {
      >
       <div className={styles.leftblock}>
        {question.completed ? (
-        <img src={successIcon} alt="success-icon" />
+        <img src={successIcon} alt='success-icon' />
        ) : (
-        <img src={icon} alt="icon" />
+        <img src={icon} alt='icon' />
        )}
        <div className={styles.theme}>
         <h3 className={styles.title}>{question.theme}</h3>
@@ -97,7 +106,13 @@ export default function Cards() {
     );
    })}
    <AnimatePresence initial={false} exitBeforeEnter={true}>
-    {modalOpen && <Modal question={openedQuestion} handleClose={closeModal} />}
+    {modalOpen && (
+     <Modal
+      question={openedQuestion}
+      handleClose={closeModal}
+      currentUser={defaultUser}
+     />
+    )}
    </AnimatePresence>
   </motion.div>
  );

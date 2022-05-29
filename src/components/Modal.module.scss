@@ -102,6 +102,14 @@
  }
 }
 
+.answered {
+ border-radius: 10px;
+ border: 1px solid colors.$success;
+ padding: 10px;
+ font-size: 18px;
+ text-align: center;
+}
+
 .buttonContainer {
  float: right;
  .postButton {

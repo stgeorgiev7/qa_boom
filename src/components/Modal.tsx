@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
+import dayjs from "dayjs";
+import { useState, useEffect, useRef } from "react";
 import Backdrop from "./Backdrop";
 import styles from "./Modal.module.scss";
 import { IQuestion } from "../types/questions";
+import { IAnswer } from "../types/answers";
+import { IUser } from "../types/user";
 import ModalCard from "./ModalCard";
 interface IBackdrop {
  handleClose: () => void;
  question: IQuestion | undefined;
+ currentUser: IUser;
 }
 const dropIn = {
  hidden: {
@@ -28,7 +33,62 @@ const dropIn = {
  },
 };
 
-export default function Modal({ handleClose, question }: IBackdrop) {
+export default function Modal({
+ handleClose,
+ question,
+ currentUser,
+}: IBackdrop) {
+ const [answer, setAnswer] = useState<string>("");
+ const currentDate: string = dayjs().toString();
+ const nextId = question && (Number(question?.answers?.length) + 1).toString();
+ const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
+ const [apiAnswers, setapiAnswers] = useState<IAnswer[]>([]);
+ const [answered, setAnswered] = useState<boolean>(false);
+ const lastAnswer = useRef<HTMLDivElement>(null);
+
+ useEffect(() => {
+  setapiAnswers((question && question?.answers) || []);
+  console.log(apiAnswers);
+ }, [question]);
+
+ const scrollToBottom = (): void => {
+  lastAnswer.current?.scrollIntoView({ behavior: "smooth" });
+ };
+
+ const handlePost = () => {
+  const answerBody: IAnswer = {
+   createdAt: currentDate,
+   user: currentUser,
+   body: answer,
+   correct: false,
+   id: nextId,
+   questionId: question?.id,
+  };
+
+  const newAnswer = async () => {
+   try {
+    await fetch(`${url}/questions/${question?.id}/answers`, {
+     method: "POST",
+     headers: {
+      "Content-Type": "application/json",
+     },
+     body: JSON.stringify(answerBody),
+    }).then((res) => {
+     console.log(res);
+     setapiAnswers([...apiAnswers, answerBody]);
+     setAnswered(true);
+     scrollToBottom();
+     console.log("new answer added");
+    });
+   } catch (error) {
+    console.log(error);
+   }
+  };
+
+  console.log(answerBody);
+  newAnswer();
+ };
+
  return (
   <Backdrop onClick={handleClose}>
    <motion.div
@@ -79,33 +139,47 @@ export default function Modal({ handleClose, question }: IBackdrop) {
      <div className={styles.answersCards}>
       <h4 className={styles.cardTitle}>Answers</h4>
       {question &&
-       question.answers.map((answer) => {
+       apiAnswers.map((answer) => {
         return (
-         <div className={answer.correct ? styles.correct : styles.card}>
+         <div
+          className={answer.correct ? styles.correct : styles.card}
+          key={answer.createdAt}
+         >
           <ModalCard
            type='answer'
            body={answer?.body}
            user={answer?.user}
-           key={answer.createdAt}
            correct={answer?.correct}
           />
          </div>
         );
        })}
+      <div ref={lastAnswer}></div>
      </div>
     </div>
 
     {/* BOTOM */}
     <div className={styles.bottomModal}>
      <div className={styles.inputContainer}>
-      <input
-       type='text'
-       className={styles.input}
-       placeholder={`Type your answer here... If it’s accepted you will win the bounty of ${question?.xp} xp...`}
-      />
+      {!answered ? (
+       <input
+        type='text'
+        className={styles.input}
+        placeholder={`Type your answer here... If it’s accepted you will win the bounty of ${question?.xp} xp...`}
+        onChange={(e) => setAnswer(e.target.value)}
+       />
+      ) : (
+       <motion.div>
+        <h2
+         className={styles.answered}
+        >{`Question answered if it’s accepted you will win the bounty of ${question?.xp} xp  🤓`}</h2>
+       </motion.div>
+      )}
      </div>
      <div className={styles.buttonContainer}>
-      <button className={styles.postButton}>POST</button>
+      <button className={styles.postButton} onClick={handlePost}>
+       POST
+      </button>
      </div>
     </div>
    </motion.div>
