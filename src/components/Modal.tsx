@@ -53,9 +53,10 @@ export default function Modal({
   console.log(apiAnswers);
  }, [question]);
 
- const scrollToBottom = (): void => {
-  lastAnswer.current?.scrollIntoView({ behavior: "smooth" });
- };
+ const scrollToBottom = (): void =>
+  lastAnswer.current?.scrollIntoView({
+   behavior: "smooth",
+  });
 
  const handlePost = () => {
   const answerBody: IAnswer = {
@@ -68,6 +69,12 @@ export default function Modal({
   };
 
   const newAnswer = async () => {
+   //  setapiAnswers([...apiAnswers, answerBody]);
+   //  setAnswered(true);
+   //  setIsAnswered(true);
+   //  scrollToBottom();
+   console.log("new answer added");
+
    try {
     await fetch(`${url}/questions/${question?.id}/answers`, {
      method: "POST",
@@ -190,15 +197,9 @@ export default function Modal({
      </div>
      <div className={styles.buttonContainer}>
       {!isAnswered ? (
-       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.99 }}
-        className={styles.postButton}
-        onClick={handlePost}
-        disabled={isAnswered}
-       >
+       <button className={styles.postButton} onClick={handlePost}>
         POST
-       </motion.button>
+       </button>
       ) : (
        <motion.button
         whileHover={{ scale: 1.05 }}

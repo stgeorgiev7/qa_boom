@@ -9,6 +9,26 @@ import dayjs from "dayjs";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./Modal";
 
+const cardContainer = {
+ hidden: { opacity: 1, scale: 0 },
+ visible: {
+  opacity: 1,
+  scale: 1,
+  transition: {
+   delayChildren: 0.3,
+   staggerChildren: 0.2,
+  },
+ },
+};
+
+const item = {
+ hidden: { y: 20, opacity: 0 },
+ visible: {
+  y: 0,
+  opacity: 1,
+ },
+};
+
 export default function Cards() {
  const [modalOpen, setModalOper] = useState<boolean>(false);
  const openModal = (): void => setModalOper(true);
@@ -51,6 +71,12 @@ export default function Cards() {
    {questions.map((question) => {
     return (
      <motion.div
+      initial={{ y: "250vh", opacity: 0 }}
+      animate={{
+       y: "0vh",
+       opacity: 1,
+       transition: { type: "spring", duration: 0.5 },
+      }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.99 }}
       onClick={(): void => {

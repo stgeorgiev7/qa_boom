@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styles from "./Backdrop.module.scss";
-import { ReactNode } from "react";
+import { ReactNode, RefObject } from "react";
 
 interface IBackdrop {
  children: ReactNode;
