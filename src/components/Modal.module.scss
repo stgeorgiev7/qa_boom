@@ -2,8 +2,8 @@
 @import "../styles/mixins";
 
 .modal {
- width: clamp(50%, 700px, 90%);
- height: min(70%, 900px);
+ width: clamp(45%, 700px, 90%);
+ height: min(100%, 900px);
  margin: auto;
  border-radius: 10px;
  display: flex;
@@ -62,8 +62,20 @@
 
 .cardWrapper {
  width: 100%;
+ height: 100%;
  background-color: colors.$base-primary-contrast;
+ padding-top: 10px;
+ overflow: scroll;
+ overflow-x: hidden;
+ &::-webkit-scrollbar {
+  display: none;
+ }
 }
+
+.cardTitle {
+ margin-left: 20px;
+}
+
 .bottomModal {
  padding: 20px;
 }
@@ -92,7 +104,9 @@
 
 .buttonContainer {
  float: right;
- margin: 20px;
+ .postButton {
+  margin-right: 20px;
+ }
 }
 
 .gradientText {

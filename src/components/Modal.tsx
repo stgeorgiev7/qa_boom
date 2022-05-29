@@ -10,22 +10,21 @@ interface IBackdrop {
 const dropIn = {
  hidden: {
   y: "-100vh",
-  scale: 0,
  },
  visible: {
   y: "0",
-  scale: 1,
   transition: {
-   duration: 0.1,
+   delay: 0.2,
    type: "spring",
    damping: 25,
    stiffness: 500,
   },
  },
  exit: {
-  scale: 0,
-  y: "100vh",
-  opacity: 0,
+  y: "200vh",
+  transition: {
+   duration: 0.5,
+  },
  },
 };
 
@@ -36,9 +35,9 @@ export default function Modal({ handleClose, question }: IBackdrop) {
     onClick={(e) => e.stopPropagation()}
     className={styles.modal}
     variants={dropIn}
-    initial="hidden"
-    animate="visible"
-    exit="exit"
+    initial='hidden'
+    animate='visible'
+    exit='exit'
    >
     {/* TOP */}
 
@@ -70,20 +69,20 @@ export default function Modal({ handleClose, question }: IBackdrop) {
 
     <div className={styles.cardWrapper}>
      <div className={styles.questionsCards}>
-      <h4>Questions</h4>
+      <h4 className={styles.cardTitle}>Questions</h4>
       <ModalCard
-       type="question"
+       type='question'
        body={question?.question}
        user={question?.user}
       />
      </div>
      <div className={styles.answersCards}>
-      <h4>Answers</h4>
+      <h4 className={styles.cardTitle}>Answers</h4>
       {question &&
        question.answers.map((answer) => {
         return (
          <ModalCard
-          type="answer"
+          type='answer'
           body={answer?.body}
           user={answer?.user}
           key={answer.createdAt}
@@ -97,7 +96,7 @@ export default function Modal({ handleClose, question }: IBackdrop) {
     <div className={styles.bottomModal}>
      <div className={styles.inputContainer}>
       <input
-       type="text"
+       type='text'
        className={styles.input}
        placeholder={`Type your answer here... If it’s accepted you will win the bounty of ${question?.xp} xp...`}
       />

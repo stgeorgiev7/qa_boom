@@ -9,6 +9,9 @@ body {
  color: colors.$text-primary-contrast;
  overflow-x: hidden;
  padding: 0 !important;
+ &::-webkit-scrollbar {
+  display: none;
+ }
 }
 
 .wrapper {
