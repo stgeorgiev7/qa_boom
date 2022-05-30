@@ -13,20 +13,21 @@ export default function Notification({ type }: INotifications) {
  useEffect(() => {
   if (type === "newAnswer") {
    setText(
-    "You have a new answer on your question for “You think you know GIT",
+    "You have a new answer on your question for “You think you know GIT"
    );
   } else if (type === "accepted") {
    setText("Your answer for “You think you know GIT” has been accepted!");
   }
  }, []);
+
  return (
   <motion.div className={styles.wrapper}>
    <div className={styles.icon}>
-    <img src={icon} alt='notification' />
+    <img src={icon} alt="notification" />
    </div>
    <div className={styles.notification}>
     <p>
-     <span>Q&A</span>
+     <span className={styles.qa}>Q&A</span>
      {text}
     </p>
    </div>
