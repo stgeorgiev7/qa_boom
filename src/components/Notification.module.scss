@@ -1,0 +1,29 @@
+@use "../styles/colors";
+@import "../styles/mixins";
+
+.wrapper {
+ display: flex;
+ flex-direction: row;
+ background: colors.$base-primary-translucent;
+ justify-content: center;
+ align-items: center;
+ align-self: center;
+ position: absolute;
+ margin: 20px 650px;
+ border-radius: 15px;
+}
+
+.icon {
+ padding: 20px;
+ width: 50px;
+ &::before {
+  content: "";
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  @include gradient-soft;
+  opacity: 0.1;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+ }
+}
