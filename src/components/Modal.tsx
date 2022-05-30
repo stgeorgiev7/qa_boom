@@ -61,15 +61,17 @@ export default function Modal({
   question?.user.name == currentUser.name ? setAsked(true) : setAsked(false);
  }, [question]);
 
- useEffect(() => {
-  console.log(question?.user.id);
-  console.log(currentUser.id);
- }, []);
-
  const scrollToBottom = (): void =>
   lastAnswer.current?.scrollIntoView({
    behavior: "smooth",
   });
+
+ const showNotification = () => {
+  setNotificationOpen(true);
+  setTimeout(() => {
+   setNotificationOpen(false);
+  }, 3000);
+ };
 
  const handlePost = () => {
   const answerBody: IAnswer = {
@@ -86,11 +88,6 @@ export default function Modal({
    setAnswered(true);
    setIsAnswered(true);
    scrollToBottom();
-   setNotificationOpen(true);
-   setTimeout(() => {
-    setNotificationOpen(false);
-   }, 3000);
-   console.log("new answer added");
 
    //  try {
    //   await fetch(`${url}/questions/${question?.id}/answers`, {
@@ -117,7 +114,9 @@ export default function Modal({
 
  return (
   <Backdrop onClick={handleClose}>
-   {notificationOpen && <Notification type="newAnswer" />}
+   {notificationOpen && askedByUser && (
+    <Notification type={askedByUser ? "newAnswer" : "accepted"} />
+   )}
 
    <motion.div
     onClick={(e) => e.stopPropagation()}
@@ -217,7 +216,13 @@ export default function Modal({
      </div>
      <div className={styles.buttonContainer}>
       {!isAnswered ? (
-       <button className={styles.postButton} onClick={handlePost}>
+       <button
+        className={styles.postButton}
+        onClick={() => {
+         handlePost();
+         showNotification();
+        }}
+       >
         POST
        </button>
       ) : (
