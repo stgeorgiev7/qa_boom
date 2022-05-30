@@ -1,6 +1,7 @@
 import { IUser } from "../types/user";
 import styles from "./ModalCard.module.scss";
 import correctIcon from "../assets/correct_icon.svg";
+import { useState, useEffect } from "react";
 
 interface IModalCard {
  type?: "question" | "answer";
@@ -21,6 +22,7 @@ export default function ModalCard({
  answerId,
 }: IModalCard) {
  const url = "https://628f2b72dc478523653aa33e.mockapi.io/";
+ const [completed, setCompleted] = useState<boolean>(correct);
 
  const handleAccept = async () => {
   const correctAnswer = { correct: true };
@@ -49,9 +51,7 @@ export default function ModalCard({
   } catch (error) {
    console.log(error);
   }
-
-  console.log(questionId);
-  console.log(answerId);
+  setCompleted(true);
  };
 
  return (
@@ -65,8 +65,10 @@ export default function ModalCard({
      </div>
     </div>
     <div className={styles.rightBlock}>
-     {correct ? <img src={correctIcon} className={styles.correctIcon} /> : null}
-     {!correct && askedByUser ? (
+     {completed ? (
+      <img src={correctIcon} className={styles.correctIcon} />
+     ) : null}
+     {!completed && askedByUser ? (
       <button className={styles.acceptButton} onClick={handleAccept}>
        Accept Answer
       </button>

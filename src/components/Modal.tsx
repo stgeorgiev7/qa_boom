@@ -59,7 +59,7 @@ export default function Modal({
   console.log(question?.user.id);
   console.log(currentUser.id);
   question?.user.name == currentUser.name ? setAsked(true) : setAsked(false);
- }, [question]);
+ }, [question, question?.answers]);
 
  const scrollToBottom = (): void =>
   lastAnswer.current?.scrollIntoView({
@@ -102,7 +102,6 @@ export default function Modal({
    }
   };
 
-  console.log(answerBody);
   newAnswer();
  };
 
