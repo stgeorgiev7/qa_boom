@@ -49,6 +49,7 @@ export default function Cards() {
  return (
   <motion.div className={styles.wrapper}>
    {questions.map((question) => {
+    console.log(question);
     return (
      <motion.div
       initial={{ y: "250vh", opacity: 0 }}

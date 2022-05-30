@@ -59,7 +59,7 @@ export default function Modal({
   console.log(question?.user.id);
   console.log(currentUser.id);
   question?.user.name == currentUser.name ? setAsked(true) : setAsked(false);
- }, [question]);
+ }, [question, question?.answers]);
 
  const scrollToBottom = (): void =>
   lastAnswer.current?.scrollIntoView({
@@ -84,31 +84,24 @@ export default function Modal({
   };
 
   const newAnswer = async () => {
-   setapiAnswers([...apiAnswers, answerBody]);
-   setAnswered(true);
-   setIsAnswered(true);
-   scrollToBottom();
-
-   //  try {
-   //   await fetch(`${url}/questions/${question?.id}/answers`, {
-   //    method: "POST",
-   //    headers: {
-   //     "Content-Type": "application/json",
-   //    },
-   //    body: JSON.stringify(answerBody),
-   //   }).then(() => {
-   //    setapiAnswers([...apiAnswers, answerBody]);
-   //    setAnswered(true);
-   //    scrollToBottom();
-   //    setIsAnswered(true);
-   //    console.log("new answer added");
-   //   });
-   //  } catch (error) {
-   //   console.log(error);
-   //  }
+   try {
+    await fetch(`${url}/questions/${question?.id}/answers`, {
+     method: "POST",
+     headers: {
+      "Content-Type": "application/json",
+     },
+     body: JSON.stringify(answerBody),
+    }).then(() => {
+     setapiAnswers([...apiAnswers, answerBody]);
+     setAnswered(true);
+     setIsAnswered(true);
+     scrollToBottom();
+    });
+   } catch (error) {
+    console.log(error);
+   }
   };
 
-  console.log(answerBody);
   newAnswer();
  };
 
@@ -173,6 +166,7 @@ export default function Modal({
       <h4 className={styles.cardTitle}>Answers</h4>
       {question &&
        apiAnswers.map((answer) => {
+        console.log(answer);
         return (
          <div
           className={answer.correct ? styles.correct : styles.card}
@@ -184,6 +178,8 @@ export default function Modal({
            user={answer?.user}
            correct={answer?.correct}
            askedByUser={askedByUser}
+           questionId={answer?.questionId}
+           answerId={answer?.id}
           />
          </div>
         );
