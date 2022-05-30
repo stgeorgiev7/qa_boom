@@ -7,6 +7,7 @@ import { IQuestion } from "../types/questions";
 import { IAnswer } from "../types/answers";
 import { IUser } from "../types/user";
 import ModalCard from "./ModalCard";
+import Notification from "./Notification";
 interface IBackdrop {
  handleClose: () => void;
  question: IQuestion | undefined;
@@ -51,6 +52,7 @@ export default function Modal({
  const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
  const [askedByUser, setAsked] = useState<boolean>(false);
+ const [notificationOpen, setNotificationOpen] = useState<boolean>(false);
 
  useEffect(() => {
   setapiAnswers((question && question?.answers) || []);
@@ -84,6 +86,10 @@ export default function Modal({
    setAnswered(true);
    setIsAnswered(true);
    scrollToBottom();
+   setNotificationOpen(true);
+   setTimeout(() => {
+    setNotificationOpen(false);
+   }, 3000);
    console.log("new answer added");
 
    //  try {
@@ -111,13 +117,15 @@ export default function Modal({
 
  return (
   <Backdrop onClick={handleClose}>
+   {notificationOpen && <Notification type="newAnswer" />}
+
    <motion.div
     onClick={(e) => e.stopPropagation()}
     className={styles.modal}
     variants={dropIn}
-    initial='hidden'
-    animate='visible'
-    exit='exit'
+    initial="hidden"
+    animate="visible"
+    exit="exit"
    >
     {/* TOP */}
 
@@ -157,7 +165,7 @@ export default function Modal({
      <div className={styles.questionsCards}>
       <h4 className={styles.cardTitle}>Questions</h4>
       <ModalCard
-       type='question'
+       type="question"
        body={question?.question}
        user={question?.user}
       />
@@ -172,7 +180,7 @@ export default function Modal({
           key={answer.createdAt}
          >
           <ModalCard
-           type='answer'
+           type="answer"
            body={answer?.body}
            user={answer?.user}
            correct={answer?.correct}
@@ -190,7 +198,7 @@ export default function Modal({
      <div className={styles.inputContainer}>
       {!answered ? (
        <input
-        type='text'
+        type="text"
         className={styles.input}
         placeholder={`Type your answer here... If it’s accepted you will win the bounty of ${question?.xp} xp...`}
         onChange={(e) => setAnswer(e.target.value)}
