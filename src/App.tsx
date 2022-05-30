@@ -3,6 +3,7 @@ import { IUser } from "./types/user";
 import { useState, useEffect } from "react";
 import styles from "./styles/App.module.scss";
 import Cards from "./components/Cards";
+import Notification from "./components/Notification";
 
 function App() {
  return (

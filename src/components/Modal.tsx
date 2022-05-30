@@ -7,6 +7,7 @@ import { IQuestion } from "../types/questions";
 import { IAnswer } from "../types/answers";
 import { IUser } from "../types/user";
 import ModalCard from "./ModalCard";
+import Notification from "./Notification";
 interface IBackdrop {
  handleClose: () => void;
  question: IQuestion | undefined;
@@ -51,6 +52,7 @@ export default function Modal({
  const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
  const [askedByUser, setAsked] = useState<boolean>(false);
+ const [notificationOpen, setNotificationOpen] = useState<boolean>(false);
 
  useEffect(() => {
   setapiAnswers((question && question?.answers) || []);
@@ -59,15 +61,17 @@ export default function Modal({
   question?.user.name == currentUser.name ? setAsked(true) : setAsked(false);
  }, [question]);
 
- useEffect(() => {
-  console.log(question?.user.id);
-  console.log(currentUser.id);
- }, []);
-
  const scrollToBottom = (): void =>
   lastAnswer.current?.scrollIntoView({
    behavior: "smooth",
   });
+
+ const showNotification = () => {
+  setNotificationOpen(true);
+  setTimeout(() => {
+   setNotificationOpen(false);
+  }, 3000);
+ };
 
  const handlePost = () => {
   const answerBody: IAnswer = {
@@ -84,7 +88,6 @@ export default function Modal({
    setAnswered(true);
    setIsAnswered(true);
    scrollToBottom();
-   console.log("new answer added");
 
    //  try {
    //   await fetch(`${url}/questions/${question?.id}/answers`, {
@@ -111,13 +114,17 @@ export default function Modal({
 
  return (
   <Backdrop onClick={handleClose}>
+   {notificationOpen && askedByUser && (
+    <Notification type={askedByUser ? "newAnswer" : "accepted"} />
+   )}
+
    <motion.div
     onClick={(e) => e.stopPropagation()}
     className={styles.modal}
     variants={dropIn}
-    initial='hidden'
-    animate='visible'
-    exit='exit'
+    initial="hidden"
+    animate="visible"
+    exit="exit"
    >
     {/* TOP */}
 
@@ -157,7 +164,7 @@ export default function Modal({
      <div className={styles.questionsCards}>
       <h4 className={styles.cardTitle}>Questions</h4>
       <ModalCard
-       type='question'
+       type="question"
        body={question?.question}
        user={question?.user}
       />
@@ -172,7 +179,7 @@ export default function Modal({
           key={answer.createdAt}
          >
           <ModalCard
-           type='answer'
+           type="answer"
            body={answer?.body}
            user={answer?.user}
            correct={answer?.correct}
@@ -190,7 +197,7 @@ export default function Modal({
      <div className={styles.inputContainer}>
       {!answered ? (
        <input
-        type='text'
+        type="text"
         className={styles.input}
         placeholder={`Type your answer here... If it’s accepted you will win the bounty of ${question?.xp} xp...`}
         onChange={(e) => setAnswer(e.target.value)}
@@ -209,7 +216,13 @@ export default function Modal({
      </div>
      <div className={styles.buttonContainer}>
       {!isAnswered ? (
-       <button className={styles.postButton} onClick={handlePost}>
+       <button
+        className={styles.postButton}
+        onClick={() => {
+         handlePost();
+         showNotification();
+        }}
+       >
         POST
        </button>
       ) : (

@@ -9,26 +9,6 @@ import dayjs from "dayjs";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./Modal";
 
-const cardContainer = {
- hidden: { opacity: 1, scale: 0 },
- visible: {
-  opacity: 1,
-  scale: 1,
-  transition: {
-   delayChildren: 0.3,
-   staggerChildren: 0.2,
-  },
- },
-};
-
-const item = {
- hidden: { y: 20, opacity: 0 },
- visible: {
-  y: 0,
-  opacity: 1,
- },
-};
-
 export default function Cards() {
  const [modalOpen, setModalOper] = useState<boolean>(false);
  const openModal = (): void => setModalOper(true);
@@ -61,7 +41,7 @@ export default function Cards() {
 
  useEffect(() => {
   const selectedQuestion = questions.find(
-   (element) => element.question === questionBody,
+   (element) => element.question === questionBody
   );
   setOpenedQuestion(selectedQuestion);
  }, [questionBody]);
@@ -88,9 +68,9 @@ export default function Cards() {
      >
       <div className={styles.leftblock}>
        {question.completed ? (
-        <img src={successIcon} alt='success-icon' />
+        <img src={successIcon} alt="success-icon" />
        ) : (
-        <img src={icon} alt='icon' />
+        <img src={icon} alt="icon" />
        )}
        <div className={styles.theme}>
         <h3 className={styles.title}>{question.theme}</h3>
